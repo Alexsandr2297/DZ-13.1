@@ -10,8 +10,8 @@ class Category:
         self.description = description
         self.products = products
 
-        total_number_of_categories = 0  # общее количество категорий
-        total_number_of_unique_products = 0  # общее количество уникальных продуктов
+        total_number_of_categories = 0  # общее количество категорий.
+        total_number_of_unique_products = 0  # общее количество уникальных продуктов.
 
 
 class Product:
