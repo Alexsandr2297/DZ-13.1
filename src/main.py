@@ -3,15 +3,14 @@ class Category:
     title: str  # Название
     description: str  # Описание
     products: list  # Товары
+    total_number_of_categories = 0  # общее количество категорий.
+    total_number_of_unique_products = 0  # общее количество уникальных продуктов.
 
     def __init__(self, title, description, products):
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
         self.title = title
         self.description = description
         self.products = products
-
-        total_number_of_categories = 0  # общее количество категорий.
-        total_number_of_unique_products = 0  # общее количество уникальных продуктов.
 
 
 class Product:
