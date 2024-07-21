@@ -10,7 +10,10 @@ class Category:
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
         self.title = title
         self.description = description
-        self.products = products
+        self.products = products.split(', ')
+
+        Category.total_number_of_categories += 1
+        Category.total_number_of_unique_products += len(self.products)
 
 
 class Product:
