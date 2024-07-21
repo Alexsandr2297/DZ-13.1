@@ -13,9 +13,9 @@ def category_title():
 def test_init(category_title):
     assert category_title.title == "Настольные игры"
     assert category_title.description == "Для веселого времяпровождения в компании"
-    assert category_title.products == "Зомби в доме, Имаджинариум, Экивоки"
-    assert category_title.total_number_of_categories == 0
-    assert category_title.total_number_of_unique_products == 0
+    assert category_title.products == ['Зомби в доме', 'Имаджинариум', 'Экивоки']
+    assert category_title.total_number_of_categories == 1
+    assert category_title.total_number_of_unique_products == 3
 
 
 @pytest.fixture()
