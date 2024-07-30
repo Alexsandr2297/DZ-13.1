@@ -10,9 +10,18 @@ class Category:
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
         self.title = title
         self.description = description
-        self.products = products
+        self.__products = products
         Category.total_number_of_categories += 1
-        Category.total_number_of_unique_products += len(self.products)
+        Category.total_number_of_unique_products += len(self.__products)
+
+    def add_products(self, product):
+        self.__products.append(product)
+        Category.total_number_of_unique_products += 1
+
+    @property
+    def products(self):
+        return [f"{product.title}, {product.price} руб. Остаток:{product.quantity} шт." for product in
+                self.__products]
 
 
 class Product:
@@ -28,3 +37,7 @@ class Product:
         self.description = description
         self.price = price
         self.quantity = quantity
+
+    @classmethod
+    def product(cls, name, description, price, quantity):
+        return cls(name, description, price, quantity)
