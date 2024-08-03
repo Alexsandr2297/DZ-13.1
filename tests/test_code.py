@@ -19,12 +19,18 @@ def test_init(category_title):
     assert Category.total_number_of_categories == 1
 
 
-def test_add_products(category_title):
-    assert len(category_title.products) == 3
-    assert str(category_title.products[0]) == 'Зомби в доме, 1999.99 руб. Остаток:10 шт.'
-    assert str(category_title.products[1]) == 'Имаджинариум, 2999.99 руб. Остаток:5 шт.'
-    assert str(category_title.products[2]) == 'Экивоки, 3999.99 руб. Остаток:3 шт.'
-    assert Category.total_number_of_unique_products == 3
+def test_add_product(category_title):
+    assert category_title.products == [
+        'Зомби в доме, 1999.99 руб. Остаток:10 шт.',
+        'Имаджинариум, 2999.99 руб. Остаток:5 шт.',
+        'Экивоки, 3999.99 руб. Остаток:3 шт.'
+    ]
+    # Добавим новый продукт и проверим, что он добавился правильно
+    new_product = Product('Монополия', 'Классическая настольная игра', 1999.99, 12)
+    category_title.add_products(new_product)
+
+    assert len(category_title.products) == 4
+    assert category_title.products[-1] == 'Монополия, 1999.99 руб. Остаток:12 шт.'
 
 
 @pytest.fixture()
