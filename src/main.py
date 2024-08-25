@@ -73,3 +73,49 @@ class CategoryIterator:
             return product
         else:
             raise StopIteration
+
+
+class Smartphone(Product):
+    """Класс для смартфона"""
+    efficiency: float  # производительность
+    model: str  # модель
+    amount_of_internal_memory: int  # объем встроенной памяти
+    color: str  # цвет
+
+    def __init__(self, efficiency, model, amount_of_internal_memory, color, title, description, price, quantity):
+        """Конструктор для смартфона"""
+        super().__init__(title, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.amount_of_internal_memory = amount_of_internal_memory
+        self.color = color
+
+    def __add__(self, other):
+        if type(self) is type(other):
+            return (self.price * self.quantity) + (other.price * other.quantity)
+        raise TypeError
+
+
+class LawnGrass(Product):
+    """Класс для травы газонной"""
+    strange_producer: str  # страна-производитель
+    germination_period: int  # срок-прорастания
+    color: str  # цвет
+
+    def __init__(self, strange_producer, germination_period, color, title, description, price, quantity):
+        """Конструктор для травы газонной"""
+        super().__init__(title, description, price, quantity)
+        self.strange_producer = strange_producer
+        self.germination_period = germination_period
+        self.color = color
+
+
+# Вывожу информацию о категории
+
+product1 = Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10)
+product2 = Product('Имаджинариум', 'Для веселого времяпровождения в компании', 2999.99, 5)
+print(product1 + product2)
+
+smartphone = Smartphone(2.50, "iphone 8 plus", 128, "grea", "smarthone",
+                        "ok", 1.999, 2)
+print(product1 + smartphone)
