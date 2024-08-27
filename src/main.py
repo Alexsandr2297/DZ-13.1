@@ -53,7 +53,10 @@ class Product:
         return f"{self.title}, {self.price} руб. Остаток: {self.quantity} шт."
 
     def __add__(self, other):
-        return (self.price * self.quantity) + (other.price * other.quantity)
+        """Сложение двух продуктов по цене и количеству, если оба продукта одного класса"""
+        if type(self) is type(other):
+            return (self.price * self.quantity) + (other.price * other.quantity)
+        raise TypeError(f"Нельзя добовлять продукт к смартфону: {type(self).__name__} и {type(other).__name__}")
 
 
 class CategoryIterator:
@@ -89,11 +92,6 @@ class Smartphone(Product):
         self.model = model
         self.amount_of_internal_memory = amount_of_internal_memory
         self.color = color
-
-    def __add__(self, other):
-        if type(self) is type(other):
-            return (self.price * self.quantity) + (other.price * other.quantity)
-        raise TypeError
 
 
 class LawnGrass(Product):
