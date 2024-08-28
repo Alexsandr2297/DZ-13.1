@@ -33,6 +33,8 @@ def test_add_product(category_title):
 
     assert len(category_title.products) == 4
     assert category_title.products[-1] == 'Монополия, 1999.99 руб. Остаток:12 шт.'
+    with pytest.raises(TypeError):
+        category_title.add_products("Некорректный продукт")
 
 
 def test__category_str__(category_title):
@@ -91,6 +93,8 @@ def test_product_add(product_title):
     expected_sum = 1999.99 * 10 + 2999.99 * 5
 
     assert (product1 + product2) == expected_sum
+    with pytest.raises(TypeError):
+        product1 + "Некорректный объект"
 
 
 def test_iterator():
