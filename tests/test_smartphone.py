@@ -1,6 +1,6 @@
 import pytest
 
-from src.main import Smartphone
+from src.smartphone import Smartphone
 
 
 @pytest.fixture()

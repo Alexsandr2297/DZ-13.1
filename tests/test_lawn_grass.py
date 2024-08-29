@@ -1,6 +1,6 @@
 import pytest
 
-from src.main import LawnGrass
+from src.lawn_grass import LawnGrass
 
 
 @pytest.fixture()
