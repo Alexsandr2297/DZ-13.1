@@ -20,3 +20,9 @@ def test_init(lawn_grass):
                                      "легко выделяющегося на фоне других культур."
     assert lawn_grass.price == 9.999
     assert lawn_grass.quantity == 5
+
+
+def test_display_info(lawn_grass, capsys):
+    lawn_grass.display_info()
+    captured = capsys.readouterr()
+    assert captured.out == 'Lawn_grass: lawn, 9.999 Rub, 5 шт, Italy, 2 Месяц, green\n'
