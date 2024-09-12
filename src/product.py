@@ -1,4 +1,10 @@
-class Product:
+from abc import ABC
+
+from src.ProductBase import ProductBase
+from src.repr_mixin import MixinRepr
+
+
+class Product(ProductBase, ABC, MixinRepr):
     """Класс для Продукта"""
     title: str  # Название
     description: str  # Описание
@@ -7,10 +13,12 @@ class Product:
 
     def __init__(self, title, description, price, quantity):
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
+
         self.title = title
         self.description = description
         self.price = price
         self.quantity = quantity
+        super().__init__()
 
     @classmethod
     def product(cls, name, description, price, quantity):
@@ -26,3 +34,10 @@ class Product:
         if type(self) is type(other):
             return (self.price * self.quantity) + (other.price * other.quantity)
         raise TypeError(f"Нельзя добовлять продукт к смартфону: {type(self).__name__} и {type(other).__name__}")
+
+    def display_info(self):
+        """Выводит информацию попродукту"""
+        print(f"Product: {self.title}, {self.price}, {self.quantity}")
+
+
+product1 = Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10)

@@ -1,8 +1,8 @@
 import pytest
 
 from src.category import Category
-from src.lawn_grass import Product
 from src.category_iterator import CategoryIterator
+from src.lawn_grass import Product
 
 
 @pytest.fixture()
@@ -61,3 +61,11 @@ def test_iter():
         next(category_iterator)
 
 
+def test_category_total(category_title):
+    assert category_title.total() == 1999.99 * 10 + 2999.99 * 5 + 3999.99 * 3
+
+
+def test_repr(category_title):
+    assert repr(category_title) == ("Category, Настольные игры, Для веселого времяпровождения в компании, ['Зомби "
+                                    "в доме, 1999.99 руб. Остаток:10 шт.', 'Имаджинариум, 2999.99 руб. Остаток:5 "
+                                    "шт.', 'Экивоки, 3999.99 руб. Остаток:3 шт.']")

@@ -1,8 +1,11 @@
-from src.product import Product
+from abc import ABC
+
+from src.CategoryBase import CategoryBase
 from src.category_iterator import CategoryIterator
+from src.product import Product
 
 
-class Category:
+class Category(CategoryBase, ABC):
     """Класс для Категории"""
     title: str  # Название
     description: str  # Описание
@@ -39,3 +42,17 @@ class Category:
     def __iter__(self):
         """"Возвращает итератор для обхода продуктов в категории."""
         return CategoryIterator(self.__products)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}, {self.title}, {self.description}, {self.products}"
+
+    def total(self):
+        """Возвращает общую стоимость всех продуктов в категории."""
+        return sum(product.price * product.quantity for product in self.__products)
+
+# category1 = Category('Настольные игры', 'Для веселого времяпровождения в компании',
+#                      [Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10),
+#                       Product('Имаджинариум', 'Для веселого времяпровождения в компании', 2999.99, 5),
+#                       Product('Экивоки', 'Для веселого времяпровождения в компании', 3999.99, 3)])
+# print(category1.__repr__())
+# print(category1.total())

@@ -37,3 +37,9 @@ def test_product_add(product_title):
     assert (product1 + product2) == expected_sum
     with pytest.raises(TypeError):
         product1 + "Некорректный объект"
+
+
+def test_display_info(product_title, capsys):
+    product_title.display_info()
+    captured = capsys.readouterr()
+    assert captured.out == 'Product: Зомби в доме, 1999.99, 10\n'

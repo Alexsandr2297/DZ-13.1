@@ -1,7 +1,9 @@
+from abc import ABC
+
 from src.product import Product
 
 
-class LawnGrass(Product):
+class LawnGrass(Product, ABC):
     """Класс для травы газонной"""
     strange_producer: str  # страна-производитель
     germination_period: int  # срок-прорастания
@@ -9,10 +11,22 @@ class LawnGrass(Product):
 
     def __init__(self, strange_producer, germination_period, color, title, description, price, quantity):
         """Конструктор для травы газонной"""
-        super().__init__(title, description, price, quantity)
+
         self.strange_producer = strange_producer
         self.germination_period = germination_period
         self.color = color
+        super().__init__(title, description, price, quantity)
+
+    def display_info(self):
+        """Выводит информацию попродукту"""
+        print(
+            f"Lawn_grass: {self.title}, {self.price} Rub, {self.quantity} шт, {self.strange_producer}, "
+            f"{self.germination_period} Месяц, {self.color}")
+
+
+law = LawnGrass("Italy", 2, "green", "lawn", "Эта трава - "
+                                             "идеальное растение для создания густого и привлекательного газона, "
+                                             "легко выделяющегося на фоне других культур.", 9.999, 5)
 
 # Вывожу информацию о категории
 #
