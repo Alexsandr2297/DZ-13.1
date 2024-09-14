@@ -1,12 +1,13 @@
-from abc import ABC
+from src.CategoryBase import CategoryBase
 
 
-class Order(ABC):
+class Order(CategoryBase):
     purchased_product: str  # купленный товар
     quantity_purchased_product: int  # количество купленного товара
     total_cost: float  # итоговая стоимость
 
-    def __init__(self, purchased_product, quantity_purchased_product, total_cost):
+    def __init__(self, purchased_product, quantity_purchased_product, total_cost, price, quantity):
+        super().__init__(price, quantity)
         self.purchased_product = purchased_product
         self.quantity_purchased_product = quantity_purchased_product
         self.total_cost = total_cost
@@ -18,9 +19,9 @@ class Order(ABC):
 
     def total(self):
         """Считает стоимость купленного товара"""
-        return self.quantity_purchased_product * self.total_cost
+        return self.price * self.quantity
 
 
-o = Order('Зомби в доме', 10, 1999.99)
+o = Order('Зомби в доме', 10, 19999.99, 1999.99, 10)
 print(o)
 print(o.total())

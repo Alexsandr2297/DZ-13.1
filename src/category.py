@@ -13,11 +13,14 @@ class Category(CategoryBase, ABC):
     total_number_of_categories = 0  # общее количество категорий.
     total_number_of_unique_products = 0  # общее количество уникальных продуктов.
 
-    def __init__(self, title, description, products):
+    def __init__(self, title, description, products, price, quantity):
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
+        super().__init__(price, quantity)
         self.title = title
         self.description = description
         self.__products = products
+        self.category_price = price
+        self.category_quantity = quantity
         Category.total_number_of_categories += 1
         Category.total_number_of_unique_products += len(self.__products)
 
@@ -47,12 +50,16 @@ class Category(CategoryBase, ABC):
         return f"{self.__class__.__name__}, {self.title}, {self.description}, {self.products}"
 
     def total(self):
-        """Возвращает общую стоимость всех продуктов в категории."""
-        return sum(product.price * product.quantity for product in self.__products)
+        """Возвращает общую стоимость всех продуктов в категории, учитывая цену и количество товара,
+        переданные в конструктор."""
+        return (self.category_price * self.category_quantity) + sum(
+            product.price * product.quantity for product in self.__products)
 
-# category1 = Category('Настольные игры', 'Для веселого времяпровождения в компании',
-#                      [Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10),
-#                       Product('Имаджинариум', 'Для веселого времяпровождения в компании', 2999.99, 5),
-#                       Product('Экивоки', 'Для веселого времяпровождения в компании', 3999.99, 3)])
+
+category1 = Category('Настольные игры', 'Для веселого времяпровождения в компании',
+                     [Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10),
+                      Product('Имаджинариум', 'Для веселого времяпровождения в компании', 2999.99, 5),
+                      Product('Экивоки', 'Для веселого времяпровождения в компании', 3999.99,
+                              3)], 1999.99, 18)
 # print(category1.__repr__())
-# print(category1.total())
+print(category1.total())
