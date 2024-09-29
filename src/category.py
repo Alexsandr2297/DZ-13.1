@@ -1,11 +1,9 @@
-from abc import ABC
-
 from src.CategoryBase import CategoryBase
 from src.category_iterator import CategoryIterator
 from src.product import Product
 
 
-class Category(CategoryBase, ABC):
+class Category(CategoryBase):
     """Класс для Категории"""
     title: str  # Название
     description: str  # Описание
@@ -15,7 +13,6 @@ class Category(CategoryBase, ABC):
 
     def __init__(self, title, description, products, price, quantity):
         """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
-        super().__init__(price, quantity)
         self.title = title
         self.description = description
         self.__products = products
@@ -23,6 +20,7 @@ class Category(CategoryBase, ABC):
         self.category_quantity = quantity
         Category.total_number_of_categories += 1
         Category.total_number_of_unique_products += len(self.__products)
+        super().__init__(price, quantity)
 
     def add_products(self, product):
         """Добавляет продукт в категорию."""
@@ -55,11 +53,27 @@ class Category(CategoryBase, ABC):
         return (self.category_price * self.category_quantity) + sum(
             product.price * product.quantity for product in self.__products)
 
+    def avg_calculater(self):
+        """Возвращает среднюю цену продуктов в категории."""
+        try:
+            if not self.__products:
+                return 0
+            return sum(product.price for product in self.__products) / len(self.__products)
+        except ZeroDivisionError as i:
+            print(i)
 
-category1 = Category('Настольные игры', 'Для веселого времяпровождения в компании',
-                     [Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10),
-                      Product('Имаджинариум', 'Для веселого времяпровождения в компании', 2999.99, 5),
-                      Product('Экивоки', 'Для веселого времяпровождения в компании', 3999.99,
-                              3)], 1999.99, 18)
-# print(category1.__repr__())
-print(category1.total())
+#
+# category1 = Category('Настольные игры', 'Для веселого времяпровождения в компании',
+#                      [Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10),
+#                       Product('Имаджинариум', 'Для веселого времяпровождения в компании', 2999.99, 5),
+#                       Product('Экивоки', 'Для веселого времяпровождения в компании', 3999.99, 3)],
+#                      1999.99, 18)
+
+# product1 = Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 0)
+# category1.add_product(product1)
+# print(category1.avg_calculater())
+
+# try:
+#     print(category1.avg_calculater())
+# except ZeroDivisionError as e:
+#     print(e)

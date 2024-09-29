@@ -43,3 +43,8 @@ def test_display_info(product_title, capsys):
     product_title.display_info()
     captured = capsys.readouterr()
     assert captured.out == 'Product: Зомби в доме, 1999.99, 10\n'
+
+
+def test_zero_quantity(product_title):
+    with pytest.raises(ValueError):
+        Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 0)

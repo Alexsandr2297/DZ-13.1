@@ -19,6 +19,8 @@ class Product(ProductBase, ABC, MixinRepr):
         self.price = price
         self.quantity = quantity
         super().__init__()
+        if self.quantity == 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
 
     @classmethod
     def product(cls, name, description, price, quantity):
@@ -40,4 +42,8 @@ class Product(ProductBase, ABC, MixinRepr):
         print(f"Product: {self.title}, {self.price}, {self.quantity}")
 
 
-product1 = Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10)
+# try:
+#     product1 = Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 0)
+# except ValueError as e:
+#     print(e)
+
