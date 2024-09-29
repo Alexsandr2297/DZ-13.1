@@ -19,9 +19,9 @@ class Order(CategoryBase):
 
     def total(self):
         """Считает стоимость купленного товара"""
-        return self.price * self.quantity
+        return self.price * self.quantity_purchased_product
 
-
-o = Order('Зомби в доме', 10, 19999.99, 1999.99, 10)
-print(o)
-print(o.total())
+# o = Order('Зомби в доме', 10, 19999.99, 1999.99, 10)
+# # print(o)
+# # print(o.total())
+# add_product(o)
