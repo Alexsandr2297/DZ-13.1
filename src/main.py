@@ -1,42 +1,18 @@
-class Category:
-    """Класс для Категории"""
-    title: str  # Название
-    description: str  # Описание
-    products: list  # Товары
-    total_number_of_categories = 0  # общее количество категорий.
-    total_number_of_unique_products = 0  # общее количество уникальных продуктов.
-
-    def __init__(self, title, description, products):
-        """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
-        self.title = title
-        self.description = description
-        self.__products = products
-        Category.total_number_of_categories += 1
-        Category.total_number_of_unique_products += len(self.__products)
-
-    def add_products(self, product):
-        self.__products.append(product)
-
-    @property
-    def products(self):
-        return [f"{product.title}, {product.price} руб. Остаток:{product.quantity} шт." for product in
-                self.__products]
+from src.lawn_grass import LawnGrass
+from src.product import Product
+from src.smartphone import Smartphone
 
 
-class Product:
-    """Класс для Продукта"""
-    title: str  # Название
-    description: str  # Описание
-    price: float  # Цена
-    quantity: int  # количество в наличии
+def main():
+    Smartphone(2.50, "8 plus", 128, "gray", "iphone",
+               "Apple iPhone 8 Plus поражает своими техническими характеристиками, "
+               "широким набором функций и красивым внешним видом.", 49.999, 2)
 
-    def __init__(self, title, description, price, quantity):
-        """Метод для инициализации экземпляра класса. Задаем значения атрибутам экземпляра."""
-        self.title = title
-        self.description = description
-        self.price = price
-        self.quantity = quantity
+    LawnGrass("Italy", 2, "green", "lawn", "Эта трава - "
+                                           "идеальное растение для создания густого и привлекательного газона, "
+                                           "легко выделяющегося на фоне других культур.", 9.999, 5)
+    Product('Зомби в доме', 'Для веселого времяпровождения в компании', 1999.99, 10)
 
-    @classmethod
-    def product(cls, name, description, price, quantity):
-        return cls(name, description, price, quantity)
+
+if __name__ == "main":
+    main()
